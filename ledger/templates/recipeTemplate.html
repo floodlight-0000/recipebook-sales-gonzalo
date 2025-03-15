@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<h1>Recipe Book</h1>
+<div>
+<h2>Recipe 1: <em>sinigang mix</em></h2>
+<p>This is the <strong>recipe</strong> for <strong>sinigang.</strong></p>
+</div>
+<div>
+    <h3><em>Ingredients:</em> </h3>
+    <ul class="ingredients">
+        <li>
+            <p>tomato - 3pcs</p>
+        </li>
+        <li>
+            <p>onion - 1pc</p>
+        </li>
+        <li>
+            <p>pork - 1kg</p>
+        </li>
+        <li>
+            <p>water - 1L</p>
+        </li>
+    </ul>
+    <p>The above ingredients are for <em>1 packet</em> of sinigang mix.</p>
+</div>
+<div>
+    <p>Navigation:
+    <a href="/recipes/list"> Recipe List</a>
+    </p>
+</div>
+</body>
+</html>

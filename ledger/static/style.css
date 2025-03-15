@@ -1,0 +1,44 @@
+:root {
+    font-family: "Roboto", "Product Sans", Helvetica, Arial, sans-serif;
+    color: #333333;
+    margin-inline: 50px;
+    margin-block: 25px;
+}
+
+body {
+    background-color: rgb(240, 226, 208);
+}
+div {
+    background-color: antiquewhite;
+    border-radius:16px;
+    padding: 6px 16px 6px 16px;
+    margin-bottom: 8px;
+}
+em {
+    font-style: normal;
+    font-weight: bold;
+    color: rgb(179, 93, 78);
+}
+
+h1 {
+    color: #444444;
+    font-size: 3em;
+}
+h2, h3 {
+    color: rgb(112, 80, 38);
+}
+
+
+ol, a {
+    font-weight: medium;
+    color: rgb(190, 142, 9);
+}
+
+ol {
+    line-height: 1.5;
+}
+ul.ingredients {
+    font-weight: bold;
+    color: rgb(112, 80, 38);
+    line-height: 0.5;
+}
