@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<h1>Recipe Book</h1>
+<div>
+<h2>Recipe 2: <em>pork</em></h2>
+<p>This is the <strong>recipe</strong> for <strong>pork.</strong></p>
+</div>
+<div>
+    <h3><em>Ingredients:</em> </h3>
+    <ul class="ingredients">
+        <li>
+            <p>garlic - 1 head</p>
+        </li>
+        <li>
+            <p>vinegar - 1/2 cup</p>
+        </li>
+        <li>
+            <p>salt - 1 tablespoon</p>
+        </li>
+        <li>
+            <p>whole black peppers - 1 tablespoon</p>
+        </li>
+    </ul>
+    <p>The above ingredients are for <em>1 kilo</em> of pork.</p>
+</div>
+<div>
+    <p>Navigation:
+    <a href="/recipes/list"> Recipe List</a>
+    </p>
+</div>
+</body>
+</html>
