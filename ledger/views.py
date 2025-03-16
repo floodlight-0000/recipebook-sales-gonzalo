@@ -1,15 +1,75 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
+
+ctx = {
+    "recipes": [
+        {
+            "name": "Recipe 1",
+            "ingredients": [
+                {
+                    "name": "tomato",
+                    "quantity": "3pcs"
+                },
+                {
+                    "name": "onion",
+                    "quantity": "1pc"
+                },
+                {
+                    "name": "pork",
+                    "quantity": "1kg"
+                },
+                {
+                    "name": "water",
+                    "quantity": "1L"
+                },
+                {
+                    "name": "sinigang mix",
+                    "quantity": "1 packet"
+                }
+            ],
+            "link": "/recipe/1"
+        },
+        {
+            "name": "Recipe 2",
+            "ingredients": [
+                {
+                    "name": "garlic",
+                    "quantity": "1 head"
+                },
+                {
+                    "name": "onion",
+                    "quantity": "1pc"
+                },
+                {
+                    "name": "vinegar",
+                    "quantity": "1/2cup"
+                },
+                {
+                    "name": "water",
+                    "quanity": "1 cup"
+                },
+                {
+                    "name": "salt",
+                    "quantity": "1 tablespoon"
+                },
+                {
+                    "name": "whole black peppers",
+                    "quantity": "1 tablespoon"
+                },
+                {
+                    "name": "pork",
+                    "quantity": "1 kilo"
+                }
+            ],
+            "link": "/recipe/2"
+        }
+    ]
+}
 
 def listView(request):
-    template = loader.get_template('listTemplate.html')
-    return HttpResponse(template.render())
+    return render(request, 'listTemplate.html')
 
-def recipeView(request):
-    template = loader.get_template('recipeTemplate.html')
-    return HttpResponse(template.render())
+def recipe1(request, num=1):
+    return render(request, 'recipeTemplate.html',ctx["recipes"][0])
 
-def recipeView2(request):
-    template = loader.get_template('recipeTemplate2.html')
-    return HttpResponse(template.render())
+def recipe2(request, num=2):
+    return render(request, 'recipeTemplate.html',ctx["recipes"][1])

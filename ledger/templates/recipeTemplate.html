@@ -7,26 +7,16 @@
 <body>
 <h1>Recipe Book</h1>
 <div>
-<h2>Recipe 1: <em>sinigang mix</em></h2>
-<p>This is the <strong>recipe</strong> for <strong>sinigang.</strong></p>
+<h2>{{ name }}: <em> {{ ingredients.4.name }} </em></h2>
 </div>
 <div>
-    <h3><em>Ingredients:</em> </h3>
+    <h3><em>Ingredients</em> </h3>
+    <p>The following ingredients are for <em> {{ ingredients.4.quantity }} </em> of {{ ingredients.4.name }}:</p>
     <ul class="ingredients">
-        <li>
-            <p>tomato - 3pcs</p>
-        </li>
-        <li>
-            <p>onion - 1pc</p>
-        </li>
-        <li>
-            <p>pork - 1kg</p>
-        </li>
-        <li>
-            <p>water - 1L</p>
-        </li>
+        {% for i in ingredients|slice:":4"%}
+        <li> <p>{{ i.name }} - {{ i.quantity}} </p> </li>
+        {% endfor %}
     </ul>
-    <p>The above ingredients are for <em>1 packet</em> of sinigang mix.</p>
 </div>
 <div>
     <p>Navigation:
