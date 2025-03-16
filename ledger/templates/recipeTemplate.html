@@ -13,9 +13,9 @@
 <div>
     <h3><em>Ingredients</em> </h3>
     <p>The following ingredients are for <em> {{ last.quantity }} </em> of {{ last.name }}:</p>
-    <ul class="ingredients">
+    <ul>
         {% for i in ingredients|slice:"0:-1"%}
-        <li> <p>{{ i.name }} - {{ i.quantity}} </p> </li>
+        <li> {{ i.name }} - {{ i.quantity}}  </li>
         {% endfor %}
     </ul>
 {% endwith %}

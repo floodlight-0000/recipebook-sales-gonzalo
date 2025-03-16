@@ -66,7 +66,7 @@ ctx = {
 }
 
 def listView(request):
-    return render(request, 'listTemplate.html')
+    return render(request, 'listTemplate.html',ctx)
 
 def recipe1(request, num=1):
     return render(request, 'recipeTemplate.html',ctx["recipes"][0])
