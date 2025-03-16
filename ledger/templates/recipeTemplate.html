@@ -7,16 +7,18 @@
 <body>
 <h1>Recipe Book</h1>
 <div>
-<h2>{{ name }}: <em> {{ ingredients.4.name }} </em></h2>
+{% with ingredients|last as last %}
+<h2>{{ name }}: <em> {{ last.name }} </em></h2>
 </div>
 <div>
     <h3><em>Ingredients</em> </h3>
-    <p>The following ingredients are for <em> {{ ingredients.4.quantity }} </em> of {{ ingredients.4.name }}:</p>
+    <p>The following ingredients are for <em> {{ last.quantity }} </em> of {{ last.name }}:</p>
     <ul class="ingredients">
         {% for i in ingredients|slice:"0:-1"%}
         <li> <p>{{ i.name }} - {{ i.quantity}} </p> </li>
         {% endfor %}
     </ul>
+{% endwith %}
 </div>
 <div>
     <p>Navigation:
