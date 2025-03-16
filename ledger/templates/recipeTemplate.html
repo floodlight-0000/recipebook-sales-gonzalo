@@ -13,7 +13,7 @@
     <h3><em>Ingredients</em> </h3>
     <p>The following ingredients are for <em> {{ ingredients.4.quantity }} </em> of {{ ingredients.4.name }}:</p>
     <ul class="ingredients">
-        {% for i in ingredients|slice:":4"%}
+        {% for i in ingredients|slice:"0:-1"%}
         <li> <p>{{ i.name }} - {{ i.quantity}} </p> </li>
         {% endfor %}
     </ul>

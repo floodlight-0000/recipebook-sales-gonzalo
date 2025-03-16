@@ -45,7 +45,7 @@ ctx = {
                 },
                 {
                     "name": "water",
-                    "quanity": "1 cup"
+                    "quantity": "1 cup"
                 },
                 {
                     "name": "salt",
