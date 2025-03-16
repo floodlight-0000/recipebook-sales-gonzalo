@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import listView, recipeView, recipeView2
+from . import views
 
 urlpatterns = [
-    path('', listView, name="listView"),
-    path('recipe/1', recipeView, name="recipeView"),
-    path('recipe/2', recipeView2, name="recipeView2"),
+    path('', views.listView, name="listView"),
+    path('recipe/1/', views.recipe1, name="recipe1"),
+    path('recipe/2/', views.recipe2, name="recipe2"),
 ]
