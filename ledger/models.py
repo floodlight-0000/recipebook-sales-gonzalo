@@ -1,27 +1,30 @@
 from django.db import models
+from django.urls import reverse
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField("date published")
+class Ingredient(models.Model):
+    name = models.CharField(max_length=99)
 
+class Recipe(models.Model):
+    name = models.CharField(max_length=99)
 
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class RecipeIngredient(models.Model):
+    quantity = models.IntegerField(default=0)
+    ingredient = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
 
 # Create 3 models:
 # --Ingredient 
 # --Has 'name' as its field
-
+# DONE
 # Recipe
 # --Has 'name' as its field
-
+# DONE
 # RecipeIngredient
 # --Needs a 'Quantity' field
 # --Needs an 'Ingredient' field which is a foreign key to the 'Ingredient' model above
 # --Needs a 'Recipe' field which is a foreign key to the 'Recipe' model above
-
+# DONE
 # Set the string representation and absolute urls of the Ingredient and Recipe models
 
 # Modify the list view created from the previous lab.
