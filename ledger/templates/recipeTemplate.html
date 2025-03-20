@@ -8,7 +8,7 @@
 <h1>Recipe Book</h1>
 <div>
 {% with ingredients|last as last %}
-<h2>{{ name }}: <em> {{ last.name }} </em></h2>
+<h2> Recipe {{ recipe.id }}: <em> {{ recipe.name }} </em></h2>
 </div>
 <div>
     <h3><em>Ingredients</em> </h3>
