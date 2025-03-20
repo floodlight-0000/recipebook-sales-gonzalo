@@ -68,7 +68,7 @@ from .models import Ingredient, Recipe, RecipeIngredient
 
 def listView(request):
     ctx = {
-        "recipes" : Recipe
+        "recipes" : recipe
     }
     return render(request, 'listTemplate.html',ctx)
 

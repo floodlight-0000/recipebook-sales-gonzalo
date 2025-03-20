@@ -10,7 +10,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return reverse('ingredient_detail', args=[str(self.name)])
+        return reverse("ingredientView", args=[self.id])
 
 class Recipe(models.Model):
     name = models.CharField(max_length=99)
@@ -24,14 +24,9 @@ class Recipe(models.Model):
         return reverse("recipeView", args=[self.id])
 
 class RecipeIngredient(models.Model):
-    quantity = models.IntegerField(default=0)
+    quantity = models.CharField(max_length=9)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-    def get_absolute_url(self):
-        return reverse('recipeIngredient_detail', args=[str(self.name)])
 
 
 # Create 3 models:

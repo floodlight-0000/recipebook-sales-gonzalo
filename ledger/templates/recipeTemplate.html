@@ -12,10 +12,10 @@
 </div>
 <div>
     <h3><em>Ingredients</em> </h3>
-    <p>The following ingredients are for <em> {{ last.quantity }} </em> of {{ last.name }}:</p>
+    <p>The following ingredients are for <em> {{ recipe.quantity }} </em> of {{ recipe.name }}:</p>
     <ul>
-        {% for i in ingredients|slice:"0:-1"%}
-        <li> {{ i.name }} - {{ i.quantity}}  </li>
+        {% for ingredient in recipe.ingredients.all %}
+        <li> {{ ingredient.ingredient.name }} </li>
         {% endfor %}
     </ul>
 {% endwith %}
