@@ -13,8 +13,9 @@
 <div>
     <h3><em>Recipes:</em></h3>
     <ul>
-        <li><a href="/recipe/1/"> {{ recipes.0.name }} </a></li>
-        <li><a href="/recipe/2/"> {{ recipes.1.name }} </a></li>
+        {% for recipe in recipes}
+        <li><a href="recipe.get_absolute_url"> {{ recipe.name }} </a></li>
+        {% endfor %}
     </ul>
 </div>
 </body>
