@@ -69,16 +69,7 @@ ctx_old = {
 def listView(request):
     return render(request, 'listTemplate.html',ctx_old)
 
-def recipe1(request, num=1):
-    recipe = Recipe.objects.get(id=num)
-    ingredients = Ingredient.objects.filter(recipe__recipe__name=recipe.name)
-    ctx = {
-        "recipe" : recipe,
-        "ingredients" : ingredients
-    }
-    return render(request, 'recipeTemplate.html',ctx)
-
-def recipe2(request, num=2):
+def recipe(request, num=''):
     recipe = Recipe.objects.get(id=num)
     ingredients = Ingredient.objects.filter(recipe__recipe__name=recipe.name)
     ctx = {
