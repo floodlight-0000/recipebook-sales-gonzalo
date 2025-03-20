@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from .models import Ingredient, Recipe, RecipeIngredient
 
-ctx = {
+ctx_old = {
     "recipes": [
         {
             "name": "Recipe 1",
@@ -66,10 +67,20 @@ ctx = {
 }
 
 def listView(request):
-    return render(request, 'listTemplate.html',ctx)
+    return render(request, 'listTemplate.html',ctx_old)
 
 def recipe1(request, num=1):
-    return render(request, 'recipeTemplate.html',ctx["recipes"][0])
+    recipe = Recipe.objects.get(id=num)
+    ctx = {
+        "recipe" : recipe
+    }
+    return render(request, 'recipeTemplate.html',ctx_old["recipes"][0])
 
 def recipe2(request, num=2):
-    return render(request, 'recipeTemplate.html',ctx["recipes"][1])
+    recipe = Recipe.objects.get(id=num)
+    ingredients = Ingredient.objects.filter(recipe__recipe__name=recipe.name)
+    ctx = {
+        "recipe" : recipe,
+        "ingredients" : ingredients
+    }
+    return render(request, 'recipeTemplate.html',ctx)
