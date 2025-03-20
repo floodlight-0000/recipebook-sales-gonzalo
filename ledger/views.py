@@ -74,9 +74,7 @@ def listView(request):
 
 def recipe(request, num=''):
     recipe = Recipe.objects.get(id=num)
-    ingredients = Ingredient.objects.filter(recipe__recipe__name=recipe.name)
     ctx = {
-        "recipe" : recipe,
-        "ingredients" : ingredients
+        "recipe" : recipe
     }
     return render(request, 'recipeTemplate.html',ctx)

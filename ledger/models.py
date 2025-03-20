@@ -21,7 +21,7 @@ class Recipe(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return reverse('recipe_detail', args=[str(self.name)])
+        return reverse("recipeView", args=[self.id])
 
 class RecipeIngredient(models.Model):
     quantity = models.IntegerField(default=0)
