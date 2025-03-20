@@ -4,6 +4,9 @@ from django.urls import reverse
 class Ingredient(models.Model):
     name = models.CharField(max_length=99)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
     def get_absolute_url(self):
@@ -11,6 +14,9 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=99)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
