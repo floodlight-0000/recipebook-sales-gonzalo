@@ -4,12 +4,17 @@ from django.urls import reverse
 class Ingredient(models.Model):
     name = models.CharField(max_length=99)
 
+    def __str__(self):
+        return self.name
+    def get_absolute_url(self):
+        return reverse('task_detail', args=[str(self.name)])
+
 class Recipe(models.Model):
     name = models.CharField(max_length=99)
 
 class RecipeIngredient(models.Model):
     quantity = models.IntegerField(default=0)
-    ingredient = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
 
