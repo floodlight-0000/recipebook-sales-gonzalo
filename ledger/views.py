@@ -67,8 +67,9 @@ from .models import Ingredient, Recipe, RecipeIngredient
 # }
 
 def listView(request):
+    recipes = Recipe.objects.all()
     ctx = {
-        "recipes" : recipe
+        "recipes" : recipes
     }
     return render(request, 'listTemplate.html',ctx)
 
