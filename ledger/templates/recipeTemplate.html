@@ -1,26 +1,21 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-<h1>Recipe Book</h1>
-<div>
-<h2> <em> {{ recipe.name }} </em></h2>
-</div>
-<div>
+{% extends "base.html" %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block intro %}
+    The following are the ingredients for <strong>{{ recipe.name }}</strong>.
+{% endblock %}
+
+{% block content %}
     <h3><em>Ingredients</em> </h3>
     <ul>
         {% for ingredient in recipe.ingredients.all %}
         <li> <em>{{ ingredient.ingredient.name }}</em> - {{ ingredient.quantity }} </li>
         {% endfor %}
     </ul>
-</div>
-<div>
-    <p>Navigation:
-    <a href="/"> Recipe List</a>
-    </p>
-</div>
-</body>
-</html>
+{% endblock %}
+
+{% block nav %}
+<div><p>Navigation: <a href="/"> Recipe List</a></p></div>
+{% endblock %}
+
