@@ -20,6 +20,14 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=99)
+    author = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        default=1
+        )
+
+    createdOn = models.DateTimeField(auto_now_add=True)
+    updatedOn = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['name']
@@ -28,6 +36,7 @@ class Recipe(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse("recipeView", args=[self.id])
+        
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=99)

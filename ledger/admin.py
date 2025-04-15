@@ -24,10 +24,10 @@ class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient
     search_fields = ('name', )
 
+admin.site.register(RecipeIngredient, RecipeIngredientAdmin)
+admin.site.register(Recipe, RecipeAdmin)
+admin.site.register(Ingredient, IngredientAdmin)
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-admin.site.register(RecipeIngredient, RecipeIngredientAdmin)
-admin.site.register(Recipe, RecipeAdmin)
-admin.site.register(Ingredient, IngredientAdmin)
