@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Ingredient, Recipe
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def listView(request):
     recipes = Recipe.objects.all()
     ctx = {
@@ -8,6 +10,7 @@ def listView(request):
     }
     return render(request, 'listTemplate.html',ctx)
 
+@login_required
 def recipe(request, num=''):
     recipe = Recipe.objects.get(id=num)
     ctx = {
