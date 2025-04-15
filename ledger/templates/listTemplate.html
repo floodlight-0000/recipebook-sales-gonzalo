@@ -1,22 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-<h1>Recipe Book</h1>
-<div>
-    <h2><em>Recipe List</em></h2>
-    <p>This is the main page. Click on the links to go to each <strong>recipe.</strong></p>
-</div>
-<div>
+{% extends "base.html" %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block intro %}
+    This is the main page. Click on the links to go to each <strong>recipe.</strong>
+{% endblock %}
+
+{% block content %}
     <h3><em>Recipes:</em></h3>
     <ul>
         {% for recipe in recipes %}
         <li> <a href="{{ recipe.get_absolute_url }}"> {{ recipe }} </a> </li>
         {% endfor %}
     </ul>
-</div>
-</body>
-</html>
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+

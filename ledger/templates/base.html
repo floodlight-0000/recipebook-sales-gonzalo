@@ -1,20 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <title>{% block sitename %}Recipe Book{% endblock %}</title>
+    <h1>Recipe Book</h1>
     <div>
         <h2><em>{% block title %}{% endblock %}</em></h2>
+        <p>{% block intro %}{% endblock %}</p>
     </div>
     <div>
         {% block content %}
         {% endblock %}
     </div>
-<div>
-    {% block nav %}
-    {% endblock %}
-</div>
+    {% block nav %}<div></div>{% endblock %}
 </body>
 </html>
