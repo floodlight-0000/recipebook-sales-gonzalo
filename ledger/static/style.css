@@ -2,8 +2,10 @@
     font-family: "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
     background-image: var(--cream-bg);
     --text-black: #363432;
+    --text-brown: rgb(117, 84, 54);
     --text-red: rgb(179, 93, 78);
     --text-white: rgb(255, 255, 255);
+    --text-warning: rgb(219, 61, 33);
     --link-color: rgb(0, 116, 194);
     --link-color-visited: rgb(195, 17, 157);
     --cream-bg: radial-gradient(at 50% 150%, rgb(248, 244, 238), rgb(221, 209, 193) 150%);
@@ -19,7 +21,6 @@
 body {
     color: var(--text-black);
     margin: 0;
-    padding: 0;
     height: 100vh;
 }
 
@@ -28,6 +29,9 @@ article {
     flex-direction: column;
     padding: 40px 80px;
 }
+
+/* ---- Div Styling ---- */
+
 div.panel {
     background-color: var(--cream-panel);
     border-radius: 20px;
@@ -43,25 +47,20 @@ div.header {
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    padding: 16px 16px 17px 16px;
+    padding: 16px;
 }
-em {
-    font-style: normal;
-    font-weight: 500;
-    color: var(--text-red);
-}
+
+/* ---- Typography ---- */
 
 h1 {
     color: var(--text-red);
     font-size: 1.25em;
     margin-block: 0 2px;
-    box-shadow: inset 0 0px 4px 1px  var(--fade-header-title);
     max-width: fit-content;
-    padding: 6px 16px 8px;
-    border-radius: 12px;
+    padding: 4px 16px 4px 12px;
 }
 h2, h3 {
-    color: rgb(117, 84, 54);
+    color: var(--text-brown);
     font-weight: 500;
     margin-block: 16px 4px;
     font-size: 1.75em;
@@ -71,11 +70,6 @@ h3 {
     font-weight: 700;
 }
 
-ul li {
-    color: rgb(112, 80, 38);
-    line-height: 1.5;
-}
-
 a {
     color: var(--link-color);
     font-weight: 500;
@@ -83,6 +77,16 @@ a {
 }
 a:visited {
     color: var(--link-color-visited);
+}
+
+em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--text-red);
+}
+
+ul li {
+    line-height: 1.5;
 }
 
 /* ---- Button Styling ---- */
@@ -95,7 +99,7 @@ button {
     color: var(--text-white);
     font-weight: 600;
     letter-spacing: 0.5pt;
-    margin-inline-end: 28px;
+    margin-inline-end: 12px;
     padding: 9px 18px;
     text-shadow: 0px 0.5px 3px var(--shadow-panel);
 }
@@ -107,7 +111,7 @@ button[type="logout"] {
 /* ---- Login page style ---- */
 
 ul.errorlist.nonfield li {
-    color: rgb(219, 61, 33);
+    color: var(--text-warning);
     font-style: italic;
     margin-inline-start: -40px;
     list-style: none;
@@ -128,6 +132,7 @@ label[for="id_username"] {
     padding-right: 16px;
     padding-top: 2px;
 }
+
 input {
     border: none;
     box-shadow: 0 0px 1px 0px  var(--fade-header-title), inset 0 0.5px 3px 0px  var(--fade-panel);
@@ -140,7 +145,7 @@ input {
 }
 input:hover {
     box-shadow: 0 0px 0px 1px  var(--fade-panel);
-    transition: box-shadow 25ms ease;
+    transition: box-shadow 50ms ease-out;
 }
 input:focus {
     box-shadow: 0 0px 0px 1px  var(--fade-panel), 0 0px 0px 4px  var(--fade-header-title);
