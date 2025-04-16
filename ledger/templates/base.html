@@ -1,20 +1,22 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <div class="header"><h1>Recipe Book</h1>
+{% extends "head.html" %}
+
+<!-- This serves as a template for the main content pages, such as the detailed or list view. -->
+
+{% block head %}
+<div class="header"><h1>Recipe Book</h1>
     {% block login %}
-    {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'logout' %}">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="logout">Logout</button>
-        </form>
-    {% endif %}
+            </form>
+        {% endif %}
     {% endblock %}
-    </div>
-</head>
+</div>
+{% endblock %}
+
+{% block body %}
 <body>
 <article>
     <div class="panel">
@@ -25,7 +27,7 @@
         {% block content %}
         {% endblock %}
     </div>
-    {% block nav %}{% endblock %}
+    {% block footer %}{% endblock %}
 </article>
 </body>
-</html>
+{% endblock %}

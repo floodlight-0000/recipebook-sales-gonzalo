@@ -1,5 +1,5 @@
 :root {
-    font-family: "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI Variable", "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
     background-image: var(--cream-bg);
     --text-black: #363432;
     --text-brown: rgb(117, 84, 54);
@@ -9,6 +9,7 @@
     --link-color: rgb(0, 116, 194);
     --link-color-visited: rgb(195, 17, 157);
     --cream-bg: radial-gradient(at 50% 150%, rgb(248, 244, 238), rgb(221, 209, 193) 150%);
+    --white-footer: rgba(255, 255, 255, 0.75);
     --cream-panel: rgb(255, 251, 243);
     --white-header: rgb(255, 253, 251);
     --fade-header: rgb(220, 216, 211);
@@ -23,11 +24,18 @@ body {
     margin: 0;
     min-height: 100vh;
 }
-
 article {
     display: flex;
     flex-direction: column;
-    padding: 40px 80px;
+    padding: 3rem 6vw;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+    right: 0;
+    left: 0;
 }
 
 /* ---- Div Styling ---- */
@@ -48,6 +56,35 @@ div.header {
     justify-content: space-between;
     margin: 0;
     padding: 16px;
+}
+div.hitbox {
+    padding: 8px;
+}
+div.navbar {
+    background-color:  var(--white-footer);
+    backdrop-filter: blur(8px);
+    border-radius: 100px;
+    box-shadow: inset 0 0px 4px -1px var(--fade-panel), 0 3px 9px -6px var(--shadow-panel);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 75vw;
+    overflow: hidden;
+    padding: 16px 40px;
+    filter: opacity(0.75);
+    pointer-events: hover;
+    transition: filter, transform 120ms cubic-bezier(0.1, 0.5, 0.125, 0.875);
+}
+div.hitbox:hover > div.navbar {
+    box-shadow: inset 0 0px 4px -1px var(--fade-panel), 0 6px 18px -6px var(--shadow-panel);
+    filter: unset;
+    pointer-events: unset;
+    transform: scale(1.025) translateY(-0.125em);
+}
+div.nav-item {
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 /* ---- Typography ---- */
@@ -87,6 +124,22 @@ em {
 
 ul li {
     line-height: 1.5;
+}
+ul.nav-list {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 16px;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    transition: column-gap 120ms cubic-bezier(0.1, 0.5, 0.125, 0.875);
+}
+div.hitbox:hover ul.nav-list {
+    column-gap: 32px;
+}
+ul.nav-list li {
+    display: flex;
+    list-style: none;
 }
 
 /* ---- Button Styling ---- */

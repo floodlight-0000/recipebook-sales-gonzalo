@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "navbar.html" %}
 
 {% block title %}Recipe List{% endblock %}
 
@@ -15,6 +15,15 @@
     </ul>
 {% endblock %}
 
-{% block nav %}{% endblock %}
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> Homepage </li>
+        <li> Recipe List </li>
+        <li> Create Recipe </li>
+        <li> Profile </li>
+    </ul>
+</div>
+{% endblock %}
 
 

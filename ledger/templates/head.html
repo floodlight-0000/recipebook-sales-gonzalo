@@ -1,0 +1,13 @@
+{% load static %}
+
+<!-- This serves as a template to be referenced by base.html -->
+<!-- It is where the head info and stylesheet reference is written. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% block head %}{% endblock %}
+</head>
+{% block body %}{% endblock %}
+</html>
