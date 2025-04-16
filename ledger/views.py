@@ -11,7 +11,7 @@ def listView(request):
     return render(request, 'listTemplate.html',ctx)
 
 @login_required
-def recipe(request, num=''):
+def detailView(request, num=''):
     recipe = Recipe.objects.get(id=num)
     ctx = {
         "recipe" : recipe,

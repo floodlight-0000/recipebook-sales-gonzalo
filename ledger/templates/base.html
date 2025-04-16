@@ -4,19 +4,15 @@
 <head>
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <div class="header"><h1>Recipe Book</h1>
+    {% block login %}
     {% if user.is_authenticated %}
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Logout</button>
-        </form>
-    {% else %}
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
+            <button type="logout">Logout</button>
         </form>
     {% endif %}
+    {% endblock %}
     </div>
 </head>
 <body>
