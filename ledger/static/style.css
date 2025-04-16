@@ -1,38 +1,49 @@
 :root {
     font-family: "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
-    color: #222222;
+    --text-black: #363432;
+    --link-color: rgb(0, 116, 194);
+    --link-color-visited: rgb(195, 17, 157);
+    --cream-bg: rgb(255, 247, 236);
+    --cream-panel: rgb(255, 251, 243);
+    --white-header: rgb(255, 253, 251);
+    --fade-header: rgb(220, 216, 211);
+    --fade-header-title: rgb(236, 234, 233);
+    --fade-panel: rgb(206, 196, 186);
+    --shadow-header: #1818185b;
+    --shadow-panel: #18181833;
 }
 
 body {
-    background-color: rgb(240, 226, 208);
+    background-color: var(--cream-bg);
+    color: var(--text-black);
     margin: 0;
-    display: flex;
-    flex-direction: column;
 }
+
 article {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    padding: 40px;
 }
-div {
-    background-color: rgb(251, 237, 219);
+div.panel {
+    background-color: var(--cream-panel);
     border-radius: 20px;
-    padding: 12px 40px 16px 40px;
-    margin-bottom: 8px;
-    margin-inline: 20px;
-    box-shadow: inset 0 -1px 3px 0 rgb(220, 206, 191), 0 1px 6px -2px #18181829;
+    box-shadow: inset 0 -2px 6px -1px var(--fade-panel), 0 6px 18px -6px var(--shadow-panel);
+    margin-bottom: 12px;
+    padding: 16px 32px;
 }
 div.header {
-    background-color: rgb(247, 238, 225);
+    background-color:  var(--white-header);
     border-radius: 0;
-    margin-inline: 0;
-    margin-bottom: 24px;
-    padding-block: 16px;
-    padding-inline-start: 24px;
-    box-shadow: inset 0 -1px 12px 0 rgb(220, 206, 191), 0 -2px 8px 0 #1818185b;
+    box-shadow: inset 0 -1px 8px 0 var(--fade-header), 0 -2px 8px 0 var(--shadow-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 16px;
 }
 em {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     color: rgb(179, 93, 78);
 }
 
@@ -40,17 +51,36 @@ h1 {
     color: rgb(179, 93, 78);
     font-size: 1.25em;
     margin-block: 0 2px;
+    box-shadow: inset 0 0px 6px 1px  var(--fade-header-title);
+    max-width: fit-content;
+    padding: 6px 16px 8px;
+    border-radius: 12px;
 }
 h2, h3 {
-    color: rgb(91, 67, 47);
+    color: rgb(117, 84, 54);
     font-weight: 500;
+    margin-block: 16px 4px;
+    font-size: 1.75em;
 }
 h3 {
-    color: rgb(91, 67, 47);
+    font-size: 1.125em;
     font-weight: 700;
 }
 
 ul li {
     color: rgb(112, 80, 38);
-    line-height: 2;
+    line-height: 1.5;
+}
+
+a {
+    color: var(--link-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+a:visited {
+    color: var(--link-color-visited);
+}
+
+button.submit {
+    justify-items: flex-end;
 }

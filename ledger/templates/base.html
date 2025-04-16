@@ -3,17 +3,25 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <div class="header"><h1>Recipe Book</h1>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
 </head>
-<div class="header"><h1>Recipe Book</h1></div>
 <body>
-    <div>
+<article>
+    <div class="panel">
         <h2>{% block title %}{% endblock %}</h2>
         <p>{% block intro %}{% endblock %}</p>
     </div>
-    <div>
+    <div class="panel">
         {% block content %}
         {% endblock %}
     </div>
     {% block nav %}<div></div>{% endblock %}
+</article>
 </body>
 </html>
