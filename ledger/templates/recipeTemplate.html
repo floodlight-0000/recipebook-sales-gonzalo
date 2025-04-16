@@ -3,7 +3,7 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block intro %}
-    made by <strong>{{ recipe.author }}</strong>
+    Made by <em>{{ recipe.author }}</em> on <strong>{{ recipe.createdOn|date:"M j" }}, {{ recipe.createdOn|date:"Y" }}.</strong>
 {% endblock %}
 
 {% block content %}
