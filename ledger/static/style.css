@@ -21,7 +21,7 @@
 body {
     color: var(--text-black);
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 article {
@@ -102,10 +102,17 @@ button {
     margin-inline-end: 12px;
     padding: 9px 18px;
     text-shadow: 0px 0.5px 3px var(--shadow-panel);
+    transition: filter 50ms ease-out;
 }
 button[type="logout"] {
     background-image: radial-gradient(at 50% 175%, rgb(232, 173, 173) 25%, rgb(168, 60, 60));
     box-shadow: 0 3px 12px -3px  rgb(232, 173, 173), inset 0 0px 2px 0px  var(--white-header), inset 0 0px 6px 1px  var(--shadow-panel);
+}
+button:hover {
+    filter: brightness(110%);
+}
+button:active {
+    filter: brightness(90%);
 }
 
 /* ---- Login page style ---- */
