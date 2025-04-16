@@ -18,7 +18,7 @@ class RecipeIngredientAdmin(admin.ModelAdmin):
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
-    search_fields = ('name', )
+    search_fields = ('name', 'author')
 
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient

@@ -3,11 +3,11 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block intro %}
-    The following are the ingredients for <strong>{{ recipe.name }}</strong>.
+    made by <strong>{{ recipe.author }}</strong>
 {% endblock %}
 
 {% block content %}
-    <h3><em>Ingredients</em> </h3>
+    <h3>Ingredients</h3>
     <ul>
         {% for ingredient in recipe.ingredients.all %}
         <li> <em>{{ ingredient.ingredient.name }}</em> - {{ ingredient.quantity }} </li>
