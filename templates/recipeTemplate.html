@@ -3,7 +3,12 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block intro %}
-    Made by <em>{{ recipe.author }}</em> on <strong>{{ recipe.createdOn|date:"M j" }}, {{ recipe.createdOn|date:"Y" }}.</strong>
+    {% if recipe.author.profile %}
+        Made by <em>{{ recipe.author.profile.name }}</em> 
+    {% else %}
+        Made by <em>{{ recipe.author }}</em> 
+    {% endif %}
+    on <strong>{{ recipe.createdOn|date:"M j" }}, {{ recipe.createdOn|date:"Y" }}.</strong>
 {% endblock %}
 
 {% block content %}
