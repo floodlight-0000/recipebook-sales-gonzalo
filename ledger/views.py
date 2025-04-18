@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import RecipeImage, Ingredient, Recipe
+from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .forms import RecipeForm
@@ -25,21 +25,21 @@ def detailView(request, num=''):
 
 @login_required
 def addRecipe(request):
-    authors = User.objects.values()
     ingredients = Ingredient.objects.all()
     form = RecipeForm()
+
     if(request.method == "POST"):
         form = RecipeForm(request.POST)
+
         if form.is_valid():
             r = Recipe()
-            r.name = request.POST.get('recipe_name')
-            r.author = request.POST.get('recipe_author')
+            r.name = form.cleaned_data.get('name')
+            r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
-            # new_ingredients = ingredients.objects.get(pk=request.POST.get('recipe_ingredients'))
             r.save()
+            
     ctx = {
-        "authors" : authors,
         "ingredients" : ingredients,
         "form" : form,
     }

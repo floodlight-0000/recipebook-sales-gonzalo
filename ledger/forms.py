@@ -1,7 +1,9 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import Recipe
 
 
-class RecipeForm(forms.Form):
-    name = forms.CharField(label='Recipe Name', max_length=100)
-    author = forms.ModelChoiceField(label='Author', queryset=User.objects.values())
+class RecipeForm(forms. ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['name',]
+    name = forms.CharField(label='New Recipe Name:', max_length=100)
