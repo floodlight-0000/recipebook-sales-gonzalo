@@ -2,14 +2,14 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-# Django User class
+# Django User models
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     bio = models.CharField(max_length=255)
 
-# Main classes
+# Main models
 
 class Recipe(models.Model):
     name = models.CharField(max_length=99)
@@ -35,7 +35,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
     
-# Recipe Foreign Key classes
+# Recipe Foreign Key models
 
 class RecipeImage(models.Model):
     image = models.ImageField(upload_to='images/', null=False)
