@@ -33,7 +33,7 @@ class Recipe(models.Model):
         return reverse("detailView", args=[self.id])
 
 class RecipeImage(models.Model):
-    image = models.ImageField() 
+    image = models.ImageField(upload_to='images/', null=False)
 
 
 class RecipeIngredient(models.Model):
