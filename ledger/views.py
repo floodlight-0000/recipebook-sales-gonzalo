@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import RecipeImage, Ingredient, Recipe
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .forms import RecipeForm
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -26,16 +27,20 @@ def detailView(request, num=''):
 def addRecipe(request):
     authors = User.objects.values()
     ingredients = Ingredient.objects.all()
+    form = RecipeForm()
+    if(request.method == "POST"):
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            r = Recipe()
+            r.name = request.POST.get('recipe_name')
+            r.author = request.POST.get('recipe_author')
+            r.createdOn = timezone.now()
+            r.updatedOn = timezone.now()
+            # new_ingredients = ingredients.objects.get(pk=request.POST.get('recipe_ingredients'))
+            r.save()
     ctx = {
         "authors" : authors,
         "ingredients" : ingredients,
+        "form" : form,
     }
-    if(request.method == "POST"):
-        r = Recipe()
-        r.name = request.POST.get('recipe_name')
-        r.author = request.POST.get('recipe_author')
-        r.createdOn = timezone.now()
-        r.updatedOn = timezone.now()
-        # new_ingredients = ingredients.objects.get(pk=request.POST.get('recipe_ingredients'))
-        r.save()
     return render(request, 'addRecipeTemplate.html', ctx)
