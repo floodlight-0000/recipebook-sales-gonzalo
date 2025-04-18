@@ -87,7 +87,7 @@ div.header {
     padding: 16px;
 }
 div.hitbox {
-    padding: 8px;
+    padding: 6px;
 }
 div.navbar {
     background-color:  var(--white-footer);

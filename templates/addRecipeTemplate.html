@@ -1,5 +1,24 @@
 {% extends "navbar.html" %}
-
+{% block intro %} 
+<form method="POST" action="/"> 
+    {% csrf_token %}
+    <label for="task_name">
+        <span>Recipe Name</span>
+        <input type="text" id="recipe_name" name="recipe_name">
+    </label>
+    <select id="recipe_author" name="recipe_author">
+        {% for author in authors %}
+        <option value="{{ author.pk }}">{{ author.name }}</option>
+        {% endfor %}
+    </select>
+    <select id="recipe_ingredients" name="recipe_ingredients" multiple>
+        {% for ingredient in ingredients %}
+        <option value="{{ ingredient.pk }}">{{ ingredient.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
 
 {% block navbar %}
 <div class="nav-item"> 
