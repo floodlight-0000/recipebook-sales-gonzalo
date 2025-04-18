@@ -1,0 +1,33 @@
+{% extends "head.html" %}
+
+<!-- This serves as the foundation of the main pages, such as the detailed or list view. -->
+
+{% block head %}
+<div class="header"><h1>Recipe Book</h1>
+    {% block login %}
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="logout">Logout</button>
+            </form>
+        {% endif %}
+    {% endblock %}
+</div>
+{% endblock %}
+
+{% block body %}
+<body>
+<article>
+    <div class="panel">
+        <h2>{% block title %}{% endblock %}</h2>
+        <p>{% block intro %}{% endblock %}</p>
+    </div>
+    <div class="panel">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block footer %}{% endblock %}
+</article>
+</body>
+{% endblock %}

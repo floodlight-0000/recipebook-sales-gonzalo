@@ -1,22 +1,28 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-<h1>Recipe Book</h1>
-<div>
-    <h2><em>Recipe List</em></h2>
-    <p>This is the main page. Click on the links to go to each <strong>recipe.</strong></p>
-</div>
-<div>
-    <h3><em>Recipes:</em></h3>
+{% extends "navbar.html" %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block intro %}
+    Take a look at all the different, tasty recipes! Click on the <strong>links</strong> to go to each recipe.
+{% endblock %}
+
+{% block content %}
+    <h3>Recipes:</h3>
     <ul>
         {% for recipe in recipes %}
         <li> <a href="{{ recipe.get_absolute_url }}"> {{ recipe }} </a> </li>
         {% endfor %}
     </ul>
+{% endblock %}
+
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> Create Recipe </li>
+        <li> Profile </li>
+        <li> <a href="/admin"> Admin </a> </li>
+    </ul>
 </div>
-</body>
-</html>
+{% endblock %}
+
+
