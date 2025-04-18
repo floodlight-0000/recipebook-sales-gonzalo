@@ -19,3 +19,7 @@ def detailView(request, num=''):
         "images" : RecipeImage.objects.filter(recipe=recipe),
     }
     return render(request, 'recipeTemplate.html',ctx)
+
+@login_required
+def addRecipe(request):
+    return render(request, 'addRecipeTemplate.html')
