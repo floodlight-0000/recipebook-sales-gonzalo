@@ -55,7 +55,7 @@ ROOT_URLCONF = 'recipebook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +67,7 @@ TEMPLATES = [
         },
     },
 ]
+TEMPLATES_URL = 'templates/'
 
 WSGI_APPLICATION = 'recipebook.wsgi.application'
 
