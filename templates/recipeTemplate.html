@@ -7,12 +7,22 @@
 {% endblock %}
 
 {% block content %}
+    <div class="panel text">
     <h3>Ingredients</h3>
     <ul>
         {% for ingredient in recipe.ingredients.all %}
         <li> <em>{{ ingredient.ingredient.name }}</em> : {{ ingredient.quantity }} </li>
         {% endfor %}
     </ul>
+    </div>
+{% endblock %}
+
+{% block images %}
+    {% for img in images %}
+    <div class="panel image">
+        <img src="{{ img.image.url }}" alt="{{ img.description }}">
+    </div>
+    {% endfor %}
 {% endblock %}
 
 {% block navbar %}

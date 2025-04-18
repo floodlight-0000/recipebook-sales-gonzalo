@@ -3,13 +3,15 @@
 {% block login %}
 <form method="POST">
     <button type="submit">Login</button>
-
 {% endblock %}
+
 
 {% block title %} Login page {% endblock %}
 
 {% block content %} 
+<div class="panel">
     {% csrf_token %}
     {{ form.as_p }}
 {% endblock %}
 </form>
+</div>

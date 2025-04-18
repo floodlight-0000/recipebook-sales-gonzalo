@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Ingredient, Recipe
+from .models import RecipeImage, Ingredient, Recipe
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -16,5 +16,6 @@ def detailView(request, num=''):
     ctx = {
         "recipe" : recipe,
         "ingredients" : Ingredient.objects.filter(recipe__recipe__name=recipe.name),
+        "images" : RecipeImage.objects.filter(recipe=recipe),
     }
     return render(request, 'recipeTemplate.html',ctx)

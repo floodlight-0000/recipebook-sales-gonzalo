@@ -19,13 +19,13 @@
 {% block body %}
 <body>
 <article>
-    <div class="panel">
-        <h2>{% block title %}{% endblock %}</h2>
-        <p>{% block intro %}{% endblock %}</p>
-    </div>
-    <div class="panel">
-        {% block content %}
-        {% endblock %}
+    <div class="panel-container">
+        <div class="panel top">
+            <h2>{% block title %}{% endblock %}</h2>
+            <p>{% block intro %}{% endblock %}</p>
+        </div>
+        {% block content %}{% endblock %}
+        {% block images %}{% endblock %}
     </div>
     {% block footer %}{% endblock %}
 </article>
