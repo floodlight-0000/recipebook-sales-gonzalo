@@ -31,7 +31,10 @@ class Recipe(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse("detailView", args=[self.id])
-        
+
+class RecipeImage(models.Model):
+    image = models.ImageField() 
+
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=99)
