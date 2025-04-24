@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
 from django.utils import timezone
-from django.contrib.auth.models import User
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientForm, RecipeIngredientForm
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -25,22 +24,37 @@ def detailView(request, num=''):
 
 @login_required
 def addRecipe(request):
-    ingredients = Ingredient.objects.all()
-    form = RecipeForm()
+    recipe_form = RecipeForm()
+    ingredient_form = IngredientForm()
+    recipeingredient_form = RecipeIngredientForm()
+
+    forms = [recipe_form, ingredient_form, recipeingredient_form]
+    ctx = { "forms" : forms}
 
     if(request.method == "POST"):
-        form = RecipeForm(request.POST)
+        recipe_form = RecipeForm(request.POST)
+        ingredient_form = IngredientForm(request.POST)
+        recipeingredient_form = RecipeIngredientForm(request.POST)
 
-        if form.is_valid():
+        forms = [recipeingredient_form, ingredient_form, recipe_form]
+        valid = [form.is_valid() for form in forms]
+
+        if all(valid):
             r = Recipe()
-            r.name = form.cleaned_data.get('name')
+            r.name = recipe_form.cleaned_data.get('recipe_name')
             r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
             r.save()
-            
-    ctx = {
-        "ingredients" : ingredients,
-        "form" : form,
-    }
+
+            i = Ingredient()
+            i.name = ingredient_form.cleaned_data.get('ingredient_name')
+            i.save()
+
+            ri = RecipeIngredient()
+            ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
+            ri.recipe = r
+            ri.ingredient = i
+            ri.save()
+
     return render(request, 'addRecipeTemplate.html', ctx)
