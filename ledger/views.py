@@ -41,20 +41,24 @@ def addRecipe(request):
 
         if all(valid):
             r = Recipe()
+            i = Ingredient()
+
             r.name = recipe_form.cleaned_data.get('recipe_name')
+            i.name = ingredient_form.cleaned_data.get('ingredient_name')
+
             r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
             r.save()
 
-            i = Ingredient()
-            i.name = ingredient_form.cleaned_data.get('ingredient_name')
-            i.save()
-
             ri = RecipeIngredient()
             ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
+            ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
             ri.recipe = r
-            ri.ingredient = i
+
+            if i.name:
+                i.save()
+                ri.ingredient = i
             ri.save()
 
     return render(request, 'addRecipeTemplate.html', ctx)

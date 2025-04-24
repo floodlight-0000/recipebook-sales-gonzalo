@@ -8,7 +8,7 @@ class RecipeForm(forms.Form):
     recipe_name = forms.CharField(label='New Recipe Name:', max_length=99)
 
 class IngredientForm(forms.Form):
-    ingredient_name = forms.CharField(label='New Ingredient Name:', max_length=99)
+    ingredient_name = forms.CharField(label='(OPTIONAL) Add new ingredient?', max_length=99, required=False)
 
 class RecipeIngredientForm(forms.ModelForm):
     class Meta:
