@@ -22,6 +22,7 @@ def detailView(request, num=''):
     }
     return render(request, 'recipeTemplate.html', ctx)
 
+
 @login_required
 def addRecipe(request):
     recipe_form = RecipeForm()
@@ -38,13 +39,13 @@ def addRecipe(request):
 
         forms = [recipeingredient_form, ingredient_form, recipe_form]
         valid = [form.is_valid() for form in forms]
-
+        # --split into separate submit buttons
         if all(valid):
             r = Recipe()
             i = Ingredient()
 
-            r.name = recipe_form.cleaned_data.get('recipe_name')
-            i.name = ingredient_form.cleaned_data.get('ingredient_name')
+            r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
+            i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
 
             r.author = request.user
             r.createdOn = timezone.now()

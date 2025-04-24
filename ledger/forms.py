@@ -15,5 +15,7 @@ class RecipeIngredientForm(forms.ModelForm):
         model = RecipeIngredient
         fields = ['ingredient', 'quantity']
     quantity = forms.CharField(label='Quantity:', max_length=99)
-    ingredient = forms.ModelChoiceField(ingredients)
+    ingredient = forms.ModelChoiceField(ingredients) 
+    # --find a way to make this a checkbox
+    # --use loop to create multiple recipeIngredient objects
 

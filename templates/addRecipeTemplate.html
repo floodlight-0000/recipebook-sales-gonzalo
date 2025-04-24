@@ -8,9 +8,9 @@
 <form method="POST">
     {% csrf_token %}
     {% for form in forms %}
-    {{ form }}
+    {{ form }} 
     {% endfor %}
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit"> # --split into separate submit buttons
 </form>
 {% endblock %}
 
