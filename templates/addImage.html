@@ -1,0 +1,26 @@
+{% extends "navbar.html" %}
+
+{% block title %} Add Image {% endblock %}
+
+{% block intro %}
+    Add an image to <strong>{{ recipe.name }}.</strong>
+{% endblock %}
+
+{% block content %} 
+<div class="panel">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ image_form }} 
+        <input type="submit" value="Submit">  
+    </form>
+</div>
+{% endblock %}
+
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> <a href="/"> Recipe List </a> </li>
+        <li> <a href="{{ recipe.get_absolute_url }}"> Back to Recipe </a> </li>
+    </ul>
+</div>
+{% endblock %}

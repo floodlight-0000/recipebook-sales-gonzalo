@@ -20,4 +20,5 @@ class RecipeIngredientForm(forms.ModelForm):
     # --use loop to create multiple recipeIngredient objects
 
 class ImageForm(forms.Form):
+    image = forms.ImageField()
     description = forms.CharField(label='add description', max_length=255, required=False)

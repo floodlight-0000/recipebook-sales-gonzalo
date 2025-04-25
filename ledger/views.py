@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
 from django.utils import timezone
 from .forms import RecipeForm, IngredientForm, RecipeIngredientForm, ImageForm
@@ -25,8 +25,23 @@ def detailView(request, num):
 @login_required
 def addImage(request, num):
     recipe = Recipe.objects.get(id=num)
-    add_image_url = RecipeImage.get_absolute_url
     image_form = ImageForm()
+    if(request.method == "POST"):
+        image_form = ImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            ri = RecipeImage()
+            ri.image = image_form.cleaned_data.get('image')
+            ri.description = image_form.cleaned_data.get('description')
+            ri.recipe = recipe
+            ri.save()
+            response = redirect(recipe.get_absolute_url())
+            return response
+    ctx = {
+        "recipe" : recipe,
+        "image_form" : image_form,
+    }
+
+    return render(request, 'addImage.html',ctx)
 
 @login_required
 def addRecipe(request):
