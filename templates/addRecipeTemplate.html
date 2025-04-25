@@ -13,8 +13,8 @@
         {% csrf_token %}
         {% for form in forms %}
         {{ form }} 
-        {% endfor %}
         <input type="submit" value="Submit">  
+        {% endfor %}
         <!-- TODO - split into separate submit buttons -->
     </form>
 </div>
@@ -23,9 +23,8 @@
 {% block navbar %}
 <div class="nav-item"> 
     <ul class="nav-list">
-        <li> <a href="/"> Recipe List </a> </li>
+        <li> <a href="/"> Back to List </a> </li>
         <li> Profile </li>
-        <li> <a href="/admin"> Admin </a> </li>
     </ul>
 </div>
 {% endblock %}

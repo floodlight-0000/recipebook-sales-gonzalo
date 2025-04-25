@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
-from django.utils import timezone
-from .forms import RecipeForm, IngredientForm, RecipeIngredientForm, ImageForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
+from .forms import RecipeForm, IngredientForm, RecipeIngredientForm, ImageForm
 
 @login_required
 def listView(request):
@@ -58,28 +58,52 @@ def addRecipe(request):
         recipeingredient_form = RecipeIngredientForm(request.POST)
 
         forms = [recipeingredient_form, ingredient_form, recipe_form]
-        valid = [form.is_valid() for form in forms]
-        # --split into separate submit buttons
-        if all(valid):
+        is_valid = [form.is_valid() for form in forms]
+
+        if recipe_form.is_valid():
             r = Recipe()
-            i = Ingredient()
-
             r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
-            i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
-
             r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
             r.save()
-
+            
+        if ingredient_form.is_valid():
+            i = Ingredient()
+            i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
+            if i.name: i.save()
+            
+        if all(is_valid):
             ri = RecipeIngredient()
             ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
             ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
             ri.recipe = r
-
-            if i.name:
-                i.save()
-                ri.ingredient = i
+            if i.name: ri.ingredient = i
             ri.save()
 
     return render(request, 'addRecipeTemplate.html', ctx)
+
+    # forms = [recipeingredient_form, ingredient_form, recipe_form]
+    # valid = [form.is_valid() for form in forms]
+
+    # if all(valid):
+    #     r = Recipe()
+    #     i = Ingredient()
+
+    #     r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
+    #     i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
+
+    #     r.author = request.user
+    #     r.createdOn = timezone.now()
+    #     r.updatedOn = timezone.now()
+    #     r.save()
+
+    #     ri = RecipeIngredient()
+    #     ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
+    #     ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
+    #     ri.recipe = r
+
+    #     if i.name:
+    #         i.save()
+    #         ri.ingredient = i
+    #     ri.save()
