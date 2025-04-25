@@ -59,6 +59,7 @@ def addRecipe(request):
 
         forms = [recipeingredient_form, ingredient_form, recipe_form]
         is_valid = [form.is_valid() for form in forms]
+        
 
         if recipe_form.is_valid():
             r = Recipe()
@@ -66,8 +67,8 @@ def addRecipe(request):
             r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
-            r.save()
-            
+            if r.name: r.save()
+
         if ingredient_form.is_valid():
             i = Ingredient()
             i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
@@ -76,9 +77,8 @@ def addRecipe(request):
         if all(is_valid):
             ri = RecipeIngredient()
             ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
+            ri.recipe = recipeingredient_form.cleaned_data.get('recipe')
             ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
-            ri.recipe = r
-            if i.name: ri.ingredient = i
             ri.save()
 
     return render(request, 'addRecipeTemplate.html', ctx)
