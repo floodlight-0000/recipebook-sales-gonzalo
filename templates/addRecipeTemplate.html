@@ -9,14 +9,13 @@
 
 {% block content %} 
 <div class="panel">
-    <form method="POST">
+    {% for form in forms %}
+    <form method="POST" class="{{ form.class_name }}">
         {% csrf_token %}
-        {% for form in forms %}
         {{ form }} 
         <input type="submit" value="Submit">  
-        {% endfor %}
-        <!-- TODO - split into separate submit buttons -->
     </form>
+    {% endfor %}
 </div>
 {% endblock %}
 

@@ -5,12 +5,15 @@ recipes = Recipe.objects.all()
 ingredients = Ingredient.objects.all()
 
 class RecipeForm(forms.Form):
+    class_name = "recipe"
     recipe_name = forms.CharField(label='New Recipe Name:', max_length=99)
 
 class IngredientForm(forms.Form):
-    ingredient_name = forms.CharField(label='(OPTIONAL) Add new ingredient?', max_length=99, required=False)
+    class_name = "ingredient"
+    ingredient_name = forms.CharField(label='(OPTIONAL) Add new ingredient?', max_length=99)
 
 class RecipeIngredientForm(forms.ModelForm):
+    class_name = "recipe_ingredient"
     class Meta:
         model = RecipeIngredient
         fields = ['ingredient', 'quantity']
@@ -20,5 +23,6 @@ class RecipeIngredientForm(forms.ModelForm):
     # --use loop to create multiple recipeIngredient objects
 
 class ImageForm(forms.Form):
+    class_name = "image"
     image = forms.ImageField()
     description = forms.CharField(label='add description', max_length=255, required=False)
