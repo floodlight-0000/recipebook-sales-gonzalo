@@ -39,8 +39,11 @@ class Ingredient(models.Model):
 
 class RecipeImage(models.Model):
     image = models.ImageField(upload_to='images/', null=False)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, default="no description provided.")
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("addImage", args=[self.id])
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=99)

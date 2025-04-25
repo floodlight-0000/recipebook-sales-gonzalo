@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import RecipeImage, RecipeIngredient, Ingredient, Recipe
 from django.utils import timezone
-from .forms import RecipeForm, IngredientForm, RecipeIngredientForm
+from .forms import RecipeForm, IngredientForm, RecipeIngredientForm, ImageForm
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -13,7 +13,7 @@ def listView(request):
     return render(request, 'listTemplate.html', ctx)
 
 @login_required
-def detailView(request, num=''):
+def detailView(request, num):
     recipe = Recipe.objects.get(id=num)
     ctx = {
         "recipe" : recipe,
@@ -22,6 +22,11 @@ def detailView(request, num=''):
     }
     return render(request, 'recipeTemplate.html', ctx)
 
+@login_required
+def addImage(request, num):
+    recipe = Recipe.objects.get(id=num)
+    add_image_url = RecipeImage.get_absolute_url
+    image_form = ImageForm()
 
 @login_required
 def addRecipe(request):

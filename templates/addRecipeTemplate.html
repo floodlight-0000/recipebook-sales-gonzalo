@@ -1,17 +1,23 @@
 {% extends "navbar.html" %}
 
-{% block head %}
-<div class="header"><h1>Recipe Book</h1></div>
-{% endblock %}
+{% block title %} Add Items {% endblock %}
 
 {% block intro %} 
-<form method="POST">
-    {% csrf_token %}
-    {% for form in forms %}
-    {{ form }} 
-    {% endfor %}
-    <input type="submit" value="Submit"> # --split into separate submit buttons
-</form>
+    <strong>Add recipes</strong> and assign ingredients to them. 
+    You can also <strong>make new ingredients</strong> entirely!
+{% endblock %}
+
+{% block content %} 
+<div class="panel">
+    <form method="POST">
+        {% csrf_token %}
+        {% for form in forms %}
+        {{ form }} 
+        {% endfor %}
+        <input type="submit" value="Submit">  
+        <!-- TODO - split into separate submit buttons -->
+    </form>
+</div>
 {% endblock %}
 
 {% block navbar %}

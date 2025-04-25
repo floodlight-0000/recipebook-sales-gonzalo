@@ -19,3 +19,5 @@ class RecipeIngredientForm(forms.ModelForm):
     # --find a way to make this a checkbox
     # --use loop to create multiple recipeIngredient objects
 
+class ImageForm(forms.Form):
+    description = forms.CharField(label='add description', max_length=255, required=False)
