@@ -50,7 +50,7 @@ def addRecipe(request):
     recipeingredient_form = RecipeIngredientForm()
 
     forms = [recipe_form, ingredient_form, recipeingredient_form]
-    ctx = { "forms" : forms}
+    msg = "Add recipes, assign ingredients to recipes, or make new ingredients."
 
     if(request.method == "POST"):
         recipe_form = RecipeForm(request.POST)
@@ -59,16 +59,21 @@ def addRecipe(request):
         
         if recipe_form.is_valid():
             r = Recipe()
-            r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
+            r.name = recipe_form.cleaned_data.get('recipe_name')
             r.author = request.user
-            r.createdOn = timezone.now()
-            r.updatedOn = timezone.now()
-            r.save()
+            if duplicateRecipe(r.name, r.author):
+                msg = r.name + " already exists for current user."
+            else:
+                r.createdOn = timezone.now()
+                r.updatedOn = timezone.now()
+                r.save()
+                msg = r.name + " added successfully!"
 
         if ingredient_form.is_valid():
             i = Ingredient()
             i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
             i.save()
+            msg = i.name + " added successfully!"
             
         if recipeingredient_form.is_valid():
             ingredients = recipeingredient_form.cleaned_data.get('ingredients')
@@ -78,8 +83,20 @@ def addRecipe(request):
                 ri.recipe = recipeingredient_form.cleaned_data.get('recipe')
                 ri.ingredient = ingredient
                 ri.save()
+            msg = "ingredients successfully assigned!"
+
+    ctx = { 
+        "forms" : forms,
+        "msg" : msg,
+    }
 
     return render(request, 'addRecipe.html', ctx)
 
-def duplicateRecipe(recipe):
-    Recipes = recipe.objects.all()
+# Helper function for duplicate name handling
+
+def duplicateRecipe(name, author):
+    Recipes = Recipe.objects.filter(author=author)
+    for recipe in Recipes:
+        if recipe.name == name:
+            return True
+    return False
