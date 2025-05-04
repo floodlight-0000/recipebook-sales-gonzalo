@@ -56,54 +56,30 @@ def addRecipe(request):
         recipe_form = RecipeForm(request.POST)
         ingredient_form = IngredientForm(request.POST)
         recipeingredient_form = RecipeIngredientForm(request.POST)
-
-        forms = [recipeingredient_form, ingredient_form, recipe_form]
-        is_valid = [form.is_valid() for form in forms]
         
-
         if recipe_form.is_valid():
             r = Recipe()
             r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
             r.author = request.user
             r.createdOn = timezone.now()
             r.updatedOn = timezone.now()
-            if r.name: r.save()
+            r.save()
 
         if ingredient_form.is_valid():
             i = Ingredient()
             i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
-            if i.name: i.save()
+            i.save()
             
-        if all(is_valid):
-            ri = RecipeIngredient()
-            ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
-            ri.recipe = recipeingredient_form.cleaned_data.get('recipe')
-            ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
-            ri.save()
+        if recipeingredient_form.is_valid():
+            ingredients = recipeingredient_form.cleaned_data.get('ingredients')
+            for ingredient in ingredients:
+                ri = RecipeIngredient()
+                ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
+                ri.recipe = recipeingredient_form.cleaned_data.get('recipe')
+                ri.ingredient = ingredient
+                ri.save()
 
-    return render(request, 'addRecipeTemplate.html', ctx)
+    return render(request, 'addRecipe.html', ctx)
 
-    # forms = [recipeingredient_form, ingredient_form, recipe_form]
-    # valid = [form.is_valid() for form in forms]
-
-    # if all(valid):
-    #     r = Recipe()
-    #     i = Ingredient()
-
-    #     r.name = recipe_form.cleaned_data.get('recipe_name') # --find a way to detect existing names
-    #     i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
-
-    #     r.author = request.user
-    #     r.createdOn = timezone.now()
-    #     r.updatedOn = timezone.now()
-    #     r.save()
-
-    #     ri = RecipeIngredient()
-    #     ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
-    #     ri.ingredient = recipeingredient_form.cleaned_data.get('ingredient')
-    #     ri.recipe = r
-
-    #     if i.name:
-    #         i.save()
-    #         ri.ingredient = i
-    #     ri.save()
+def duplicateRecipe(recipe):
+    Recipes = recipe.objects.all()

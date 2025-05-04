@@ -3,20 +3,21 @@
 {% block title %} Add Items {% endblock %}
 
 {% block intro %} 
-    <strong>Add recipes</strong> and assign ingredients to them. 
-    You can also <strong>make new ingredients</strong> entirely!
+    <strong>Add recipes,</strong> <strong>assign ingredients</strong> to recipes, or <strong>make new ingredients.</strong>
 {% endblock %}
 
 {% block content %} 
+{% for form in forms %}
 <div class="panel">
-    {% for form in forms %}
+<h4>{{ form.heading_text }}</h4>
     <form method="POST" class="{{ form.class_name }}">
         {% csrf_token %}
         {{ form }} 
         <input type="submit" value="Submit">  
     </form>
-    {% endfor %}
 </div>
+{% endfor %}
+
 {% endblock %}
 
 {% block navbar %}

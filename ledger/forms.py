@@ -1,26 +1,29 @@
 from django import forms
-from .models import Recipe, RecipeIngredient, Ingredient
+from django.forms import Form, ModelForm, CheckboxSelectMultiple
+from .models import RecipeIngredient, Ingredient
 
-recipes = Recipe.objects.all()
-ingredients = Ingredient.objects.all()
+all_ingredients = Ingredient.objects.all()
 
-class RecipeForm(forms.Form):
+class RecipeForm(Form):
     class_name = "recipe"
+    heading_text = "Add New Recipe"
     recipe_name = forms.CharField(label='New Recipe name:', max_length=99)
 
-class IngredientForm(forms.Form):
+class IngredientForm(Form):
     class_name = "ingredient"
+    heading_text = "Add New Ingredient"
     ingredient_name = forms.CharField(label='New Ingredient name:', max_length=99)
 
-class RecipeIngredientForm(forms.ModelForm):
+class RecipeIngredientForm(ModelForm):
     class_name = "recipe_ingredient"
+    heading_text = "Assign Ingredient/s to a Recipe"
+
     class Meta:
         model = RecipeIngredient
-        fields = ['ingredient', 'quantity', 'recipe']
-    # --find a way to make this a checkbox
-    # --use loop to create multiple recipeIngredient objects
+        fields = ['recipe', 'quantity']
 
-class ImageForm(forms.Form):
-    class_name = "image"
+    ingredients = forms.ModelMultipleChoiceField(all_ingredients, widget=CheckboxSelectMultiple) 
+
+class ImageForm(Form):
     image = forms.ImageField()
     description = forms.CharField(label='Add description', max_length=255, required=False)
