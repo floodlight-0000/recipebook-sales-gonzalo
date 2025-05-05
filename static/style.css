@@ -1,3 +1,8 @@
+/* 
+CSS stylesheet, non-framework, which uses CSS variables to reduce repetition of code. 
+Colors are chosen to comply closely with WCAG guidelines.
+*/
+
 :root {
     font-family: "Segoe UI Variable", "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
     background-image: var(--cream-bg);

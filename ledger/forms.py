@@ -4,6 +4,10 @@ from .models import RecipeIngredient, Ingredient
 
 all_ingredients = Ingredient.objects.all()
 
+# Each form has standardized internal variables for referencing in the addRecipe template.
+# They are used to populate heading and subtitle text.
+# This acts similarly to a ctx.
+
 class RecipeForm(Form):
     class_name = "recipe"
     heading_text = "Add New Recipe"
@@ -21,6 +25,10 @@ class RecipeIngredientForm(ModelForm):
     class Meta:
         model = RecipeIngredient
         fields = ['recipe', 'quantity']
+
+    # while not required by the specs, this form can handle multiple inputs of ingredients via
+    # the ModelMultipleChoiceField. Handling of the resulting set of inputs is done in the
+    # associated addRecipe view. A more intuitive widget replaces the default option.
 
     ingredients = forms.ModelMultipleChoiceField(all_ingredients, widget=CheckboxSelectMultiple) 
 

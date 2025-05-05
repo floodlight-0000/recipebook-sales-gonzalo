@@ -4,6 +4,7 @@
 
 {% block head %}
 <div class="header"><h1>Recipe Book</h1>
+    <!-- The login block is overriden only in the login page. -->
     {% block login %}
         {% if user.is_authenticated %}
             <form method="POST" action="{% url 'logout' %}">
@@ -24,10 +25,12 @@
             <h2>{% block title %}{% endblock %}</h2>
             <p>{% block intro %}{% endblock %}</p>
         </div>
+        <!-- Dud blocks for content; overriden by view templates. -->
         {% block content %}{% endblock %}
         {% block images %}{% endblock %}
     </div>
-    {% block footer %}{% endblock %}
+    <!-- A dud block to be overriden by the navbar template. -->
+    {% block footer %}{% endblock %} 
 </article>
 </body>
 {% endblock %}

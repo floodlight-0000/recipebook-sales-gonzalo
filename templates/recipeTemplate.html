@@ -1,9 +1,12 @@
 {% extends "navbar.html" %}
 
+<!-- Template for detailed view. It relies heavily on context provided from its associated view function. -->
+
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block intro %}
-    {% if recipe.author.profile %}
+    <!-- Conditional to handle cases where the author (Profile) has no name, only its own username. -->
+    {% if recipe.author.profile %} 
         Made by <em>{{ recipe.author.profile.name }}</em> 
     {% else %}
         Made by <em>{{ recipe.author }}</em> 
@@ -15,6 +18,7 @@
     <div class="panel text">
     <h3>Ingredients</h3>
     <ul>
+        <!-- Contextual loop using filter context from detailView. -->
         {% for ingredient in recipe.ingredients.all %}
         <li> <em>{{ ingredient.ingredient.name }}</em> : {{ ingredient.quantity }} </li>
         {% endfor %}
@@ -23,12 +27,15 @@
 {% endblock %}
 
 {% block images %}
+    <!-- Contextual loop using images context and queryset from detailView. -->
     {% for img in images %}
     <div class="panel image">
         <img src="{{ img.image.url }}" alt="{{ img.description }}">
     </div>
     {% endfor %}
 {% endblock %}
+
+<!-- The navbar allows for adding new images to the current recipe, or going back to the list view. -->
 
 {% block navbar %}
 <div class="nav-item"> 
