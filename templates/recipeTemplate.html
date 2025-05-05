@@ -1,0 +1,47 @@
+{% extends "navbar.html" %}
+
+<!-- Template for detailed view. It relies heavily on context provided from its associated view function. -->
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block intro %}
+    <!-- Conditional to handle cases where the author (Profile) has no name, only its own username. -->
+    {% if recipe.author.profile %} 
+        Made by <em>{{ recipe.author.profile.name }}</em> 
+    {% else %}
+        Made by <em>{{ recipe.author }}</em> 
+    {% endif %}
+    on <strong>{{ recipe.createdOn|date:"M j" }}, {{ recipe.createdOn|date:"Y" }}.</strong>
+{% endblock %}
+
+{% block content %}
+    <div class="panel text">
+    <h3>Ingredients</h3>
+    <ul>
+        <!-- Contextual loop using filter context from detailView. -->
+        {% for ingredient in recipe.ingredients.all %}
+        <li> <em>{{ ingredient.ingredient.name }}</em> : {{ ingredient.quantity }} </li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endblock %}
+
+{% block images %}
+    <!-- Contextual loop using images context and queryset from detailView. -->
+    {% for img in images %}
+    <div class="panel image">
+        <img src="{{ img.image.url }}" alt="{{ img.description }}">
+    </div>
+    {% endfor %}
+{% endblock %}
+
+<!-- The navbar allows for adding new images to the current recipe, or going back to the list view. -->
+
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> <a href="/"> Back to List </a> </li>
+        <li> <a href="{{ recipe.get_absolute_url }}add_image"> Add Image </a> </li>
+    </ul>
+</div>
+{% endblock %}

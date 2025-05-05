@@ -1,5 +1,7 @@
 {% extends "navbar.html" %}
 
+<!-- Template for list view. It uses a simple loop over all recipe objects. -->
+
 {% block title %}Recipe List{% endblock %}
 
 {% block intro %}
@@ -7,20 +9,23 @@
 {% endblock %}
 
 {% block content %}
+<div class="panel">
     <h3>Recipes:</h3>
     <ul>
         {% for recipe in recipes %}
         <li> <a href="{{ recipe.get_absolute_url }}"> {{ recipe }} </a> </li>
         {% endfor %}
     </ul>
+</div>
 {% endblock %}
+
+<!-- The navbar allows for adding new items, or going to profile (concept). -->
 
 {% block navbar %}
 <div class="nav-item"> 
     <ul class="nav-list">
-        <li> Create Recipe </li>
+        <li> <a href="/recipe/add"> Add Items </a> </li>
         <li> Profile </li>
-        <li> <a href="/admin"> Admin </a> </li>
     </ul>
 </div>
 {% endblock %}

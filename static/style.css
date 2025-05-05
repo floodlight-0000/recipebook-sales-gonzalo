@@ -1,3 +1,8 @@
+/* 
+CSS stylesheet, non-framework, which uses CSS variables to reduce repetition of code. 
+Colors are chosen to comply closely with WCAG guidelines.
+*/
+
 :root {
     font-family: "Segoe UI Variable", "Segoe UI", "SF Pro Text", "Inter", "Cantarell", "Ubuntu Sans", Helvetica, Arial, sans-serif;
     background-image: var(--cream-bg);
@@ -8,15 +13,20 @@
     --text-warning: rgb(219, 61, 33);
     --link-color: rgb(0, 116, 194);
     --link-color-visited: rgb(195, 17, 157);
+    
     --cream-bg: radial-gradient(at 50% 150%, rgb(248, 244, 238), rgb(221, 209, 193) 150%);
     --white-footer: rgba(255, 255, 255, 0.75);
     --cream-panel: rgb(255, 251, 243);
     --white-header: rgb(255, 253, 251);
+   
     --fade-header: rgb(220, 216, 211);
     --fade-header-title: rgb(236, 234, 233);
     --fade-panel: rgb(206, 196, 186);
     --shadow-header: #1818185b;
     --shadow-panel: #18181833;
+
+    --panel-spacing: 12px;
+    --panel-main-height: 300px;
 }
 
 body {
@@ -27,7 +37,7 @@ body {
 article {
     display: flex;
     flex-direction: column;
-    padding: 3rem 6vw;
+    padding: 3rem 15vw;
 }
 footer {
     display: flex;
@@ -36,17 +46,41 @@ footer {
     bottom: 0px;
     right: 0;
     left: 0;
+    box-shadow: inset 0 -20px 16px -16px var(--shadow-header);
 }
 
-/* ---- Div Styling ---- */
+/* ---- Panels Div Styling ---- */
 
+div.panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--panel-spacing);
+}
 div.panel {
     background-color: var(--cream-panel);
     border-radius: 20px;
     box-shadow: inset 0 -2px 6px -1px var(--fade-panel), 0 6px 18px -6px var(--shadow-panel);
-    margin-bottom: 12px;
-    padding: 16px 32px;
+    margin-bottom:  var(--panel-spacing);
+    padding: 12px 36px;
+    align-content: center;
+    flex-grow: 1;
 }
+div.panel.top {
+    width: 100%;
+    text-align: center;
+}
+div.panel.text {
+    height: var(--panel-main-height);
+    flex-grow: 2;
+}
+div.panel.image {
+    height: var(--panel-main-height);
+    padding: 12px;
+    flex-grow: 0;
+}
+
+/* ---- Other Div Styling ---- */
+
 div.header {
     background-color:  var(--white-header);
     border-radius: 0;
@@ -58,28 +92,28 @@ div.header {
     padding: 16px;
 }
 div.hitbox {
-    padding: 8px;
+    padding: 6px;
 }
 div.navbar {
     background-color:  var(--white-footer);
     backdrop-filter: blur(8px);
     border-radius: 100px;
-    box-shadow: inset 0 0px 4px -1px var(--fade-panel), 0 3px 9px -6px var(--shadow-panel);
+    box-shadow: inset 0 0px 4px -1px var(--fade-panel), 0 6px 18px -6px var(--shadow-panel);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     max-width: 75vw;
     overflow: hidden;
     padding: 16px 40px;
-    filter: opacity(0.75);
     pointer-events: hover;
-    transition: filter, transform 120ms cubic-bezier(0.1, 0.5, 0.125, 0.875);
+    transition: transform 120ms cubic-bezier(0.1, 0.5, 0.125, 0.875);
 }
 div.hitbox:hover > div.navbar {
+    backdrop-filter: blur(16px);
     box-shadow: inset 0 0px 4px -1px var(--fade-panel), 0 6px 18px -6px var(--shadow-panel);
-    filter: unset;
+    filter: brightness(1.05);
     pointer-events: unset;
-    transform: scale(1.025) translateY(-0.125em);
+    transform: scale(1.0625) translateY(-0.125em);
 }
 div.nav-item {
     align-items: center;
@@ -96,13 +130,18 @@ h1 {
     max-width: fit-content;
     padding: 4px 16px 4px 12px;
 }
-h2, h3 {
+
+h2, h3, h4 {
     color: var(--text-brown);
-    font-weight: 500;
-    margin-block: 16px 4px;
-    font-size: 1.75em;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-block: 20px;
 }
 h3 {
+    font-size: 1.75em;
+    font-weight: 500;
+}
+h4 {
     font-size: 1.125em;
     font-weight: 700;
 }
@@ -126,12 +165,13 @@ em {
 }
 
 ul li {
-    line-height: 1.5;
+    line-height: 1.75;
 }
 ul.nav-list {
     display: flex;
     justify-content: space-around;
     column-gap: 14px;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
     overflow: auto;
@@ -214,3 +254,12 @@ input:focus {
     box-shadow: 0 0px 0px 1px  var(--fade-panel), 0 0px 0px 4px  var(--fade-header-title);
     outline: none;
 }
+
+/* Images */
+
+img {
+    width: auto;
+    height: 300px;
+    border-radius: 16px;
+    box-shadow: inset 0 0px 6px 2px var(--cream-panel);
+  }

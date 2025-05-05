@@ -1,0 +1,37 @@
+{% extends "navbar.html" %}
+
+<!-- Template for the addRecipe view. Recipe, Ingredient 
+and RecipeIngredient data can all be added separately. -->
+ 
+{% block title %} Add Items {% endblock %}
+
+{% block intro %} 
+    <!-- A default subtitle blurb unless there is a duplicate name or ingredient. 
+    Displays success message if data is successfully added. -->
+    <em>{{ msg }}</em>
+{% endblock %}
+
+{% block content %} 
+{% for form in forms %}
+<!-- Looping over forms instead of manual declaration is made possible through 
+included text data for the heading text within the form classes themselves. -->
+<div class="panel">
+<h4>{{ form.heading_text }}</h4>
+    <form method="POST" class="{{ form.class_name }}">
+        {% csrf_token %}
+        {{ form }} 
+        <input type="submit" value="Submit">  
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> <a href="/"> Back to List </a> </li>
+        <li> Profile </li>
+    </ul>
+</div>
+{% endblock %}

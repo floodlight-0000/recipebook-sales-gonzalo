@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+<!-- A floating nav bar component that serves as a kind of footer/dock.
+It appears in almost every page. It has been implemented as an extension 
+of base.html to reduce that template's complexity. -->
+
+{% block footer %}
+<footer>
+<div class="hitbox">
+<div class="navbar">
+    {% block navbar %}{% endblock %}
+</div>
+</div>
+</footer>
+{% endblock %}

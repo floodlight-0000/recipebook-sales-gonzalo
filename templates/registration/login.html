@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<!-- A page with minimal content and no footer, acts as a landing page for new visitors. 
+It is the only place accessible without a login; it is also the redirect upon logout. -->
+
+{% block login %}
+<!-- The form encompasses the whole DOM in order to allow the login button to remain in 
+its natural position at the top header and still function properly. -->
+<form method="POST">
+    <!-- Default buttons are green. Those with type="logout" are red (see base template). -->
+    <button type="submit">Login</button>
+
+{% endblock %}
+
+
+{% block title %} Login page {% endblock %}
+
+{% block content %} 
+<div class="panel">
+    {% csrf_token %}
+    {{ form.as_p }}
+{% endblock %}
+</div>
+</form>

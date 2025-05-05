@@ -1,0 +1,30 @@
+{% extends "navbar.html" %}
+
+<!-- Simple template for a view that is used to add images to a particular recipe. -->
+
+{% block title %} Add Image {% endblock %}
+
+{% block intro %}
+    Add an image to <strong>{{ recipe.name }}.</strong>
+{% endblock %}
+
+{% block content %} 
+<div class="panel">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ image_form }} 
+        <input type="submit" value="Submit">  
+    </form>
+</div>
+{% endblock %}
+
+<!-- The navbar allows for returning to either the current recipe or the main list view. -->
+
+{% block navbar %}
+<div class="nav-item"> 
+    <ul class="nav-list">
+        <li> <a href="/"> Recipe List </a> </li>
+        <li> <a href="{{ recipe.get_absolute_url }}"> Back to Recipe </a> </li>
+    </ul>
+</div>
+{% endblock %}
