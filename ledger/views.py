@@ -61,7 +61,7 @@ def addRecipe(request):
             r = Recipe()
             r.name = recipe_form.cleaned_data.get('recipe_name')
             r.author = request.user
-            if duplicateRecipe(r.name, r.author):
+            if duplicateItem(Recipe, r.name, r.author):
                 msg = r.name + " already exists for current user."
             else:
                 r.createdOn = timezone.now()
@@ -71,9 +71,12 @@ def addRecipe(request):
 
         if ingredient_form.is_valid():
             i = Ingredient()
-            i.name = ingredient_form.cleaned_data.get('ingredient_name') # --prevent duplicate ingredients
-            i.save()
-            msg = i.name + " added successfully!"
+            i.name = ingredient_form.cleaned_data.get('ingredient_name') 
+            if duplicateItem(Ingredient, i.name):
+                msg = i.name + " already exists."
+            else:
+                i.save()
+                msg = i.name + " added successfully!"
             
         if recipeingredient_form.is_valid():
             ingredients = recipeingredient_form.cleaned_data.get('ingredients')
@@ -94,9 +97,13 @@ def addRecipe(request):
 
 # Helper function for duplicate name handling
 
-def duplicateRecipe(name, author):
-    Recipes = Recipe.objects.filter(author=author)
-    for recipe in Recipes:
-        if recipe.name == name:
+def duplicateItem(model, name, author=None):
+    if model == Recipe:
+        items = model.objects.filter(author=author)
+    else:
+        items = model.objects.all()    
+
+    for item in items:
+        if item.name == name:
             return True
     return False
