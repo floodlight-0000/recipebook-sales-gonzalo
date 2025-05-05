@@ -62,31 +62,34 @@ def addRecipe(request):
             r.name = recipe_form.cleaned_data.get('recipe_name')
             r.author = request.user
             if duplicateItem(Recipe, r.name, r.author):
-                msg = r.name + " already exists for current user."
+                msg = f"Recipe '{r.name}' already exists for user ({r.author})."
             else:
                 r.createdOn = timezone.now()
                 r.updatedOn = timezone.now()
                 r.save()
-                msg = r.name + " added successfully!"
+                msg = f"Recipe '{r.name}' added successfully!"
 
         if ingredient_form.is_valid():
             i = Ingredient()
             i.name = ingredient_form.cleaned_data.get('ingredient_name') 
             if duplicateItem(Ingredient, i.name):
-                msg = i.name + " already exists."
+                msg = f"Ingredient '{i.name}' already exists."
             else:
                 i.save()
-                msg = i.name + " added successfully!"
+                msg = f"Ingredient '{i.name}' added successfully!"
             
         if recipeingredient_form.is_valid():
             ingredients = recipeingredient_form.cleaned_data.get('ingredients')
+            recipe = recipeingredient_form.cleaned_data.get('recipe')
+            quantity = recipeingredient_form.cleaned_data.get('quantity')
+            
             for ingredient in ingredients:
                 ri = RecipeIngredient()
-                ri.quantity = recipeingredient_form.cleaned_data.get('quantity')
-                ri.recipe = recipeingredient_form.cleaned_data.get('recipe')
+                ri.quantity = quantity
+                ri.recipe = recipe
                 ri.ingredient = ingredient
                 ri.save()
-            msg = "ingredients successfully assigned!"
+            msg = f"{quantity} of ingredient/s successfully assigned to recipe '{recipe}.'"
 
     ctx = { 
         "forms" : forms,
